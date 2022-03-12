@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Joe's Hotdog Stand</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            text-align: center;
+        }
+
+        header {
+            display: block;
+            font-size: 30px;
+            color: red;
+            text-align: center;
+            background-color: yellow;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .responsive {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 0px;
+        }
+
+        #hotdogsDiv, #friesDiv, #sodasDiv {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        label {
+            margin-left: 5px;
+        }
+
+        #button, #result {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header><strong>Joe's Hotdog Stand</strong></header>
+
+    <div id="container">
+        <div id="hotdogsDiv">
+            <p>Hotdog ($3.75 ea)</p>
+            <form>
+                <label for="hotdogs">Quantity:</label>
+                <select name="hotdogs" id="hotdogs">
+                    <option selected disbled hidden style='display: none' value = ''></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </form>
+        </div>
+
+        <div id="friesDiv">
+            <p>Fries ($2.00 ea)</p>
+            <form>
+                <label for="fries">Quantity:</label>
+                <select name="fries" id="fries">
+                    <option selected disbled hidden style='display: none' value = ''></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </form>
+        </div>
+
+        <div id="sodasDiv">
+            <p>Soda ($1.80 ea)</p>
+            <form>
+                <label for="sodas">Quantity:</label>
+                <select name="sodas" id="sodas">
+                    <option selected disbled hidden style='display: none' value = ''></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <button type="button" id="button">Calculate Order Total</button>
+
+    <div id="result"></div>
+    
+    <img src="pic.jpg" alt="Restauraunt picture" class="responsive">
+
+    <script>
+        document.getElementById("button").onclick = function() {
+            var subtotal = (hotdogs.value * 3.75) + (fries.value * 2.00) + (sodas.value * 1.80);
+            var discount = 0;
+            var newsubtotal = subtotal;
+
+            if (subtotal >= 20) {
+                discount = subtotal * 0.1;
+                var newsubtotal = subtotal - discount;
+            }
+
+            var tax = newsubtotal * 0.0625;
+            var final = newsubtotal + tax;
+
+            if (final == 0) {
+                alert("Error: Can't calculate order total when no items have been ordered!");
+            }
+            else {
+                document.getElementById("result").innerHTML = "Subtotal was: $" + subtotal.toFixed(2) + ". Discount: $" + 
+                discount.toFixed(2) + ". Subtotal with discount: $" + newsubtotal.toFixed(2) + ". Taxes: $" + 
+                tax.toFixed(2) + ". Final total: $" + final.toFixed(2) + ".";
+            }
+        }
+    </script>
+
+</body>
